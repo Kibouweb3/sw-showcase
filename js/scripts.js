@@ -50,7 +50,12 @@ let contractDummy;
 	contractDummy = contract.connect(dummy);
 })();
 
+let isGettingShip = false;
+
 getShipBtn.addEventListener('click', async function() {
+	if (isGettingShip) return;
+	isGettingShip = true;
+
 	getShipBtn.textContent = "Loading...";
 
 	let account = await getAccount();
@@ -67,6 +72,7 @@ getShipBtn.addEventListener('click', async function() {
 	if (id == 69) {
 		alert("All ships are taken. Contact the author to get one");
 		getShipBtn.textContent = "Get Ship";
+		isGettingShip = false;
 		return;
 	}
 
@@ -79,9 +85,11 @@ getShipBtn.addEventListener('click', async function() {
 	if (tx.status != 1) {
 		alert('Something went wrong. Are you sure you\'re connected to Rinkeby?');
 		getShipBtn.textContent = "Get Ship";
+		isGettingShip = false;
 		return;
 	}
 
 	alert(`You have ship #${id} now! Jot down the number somewhere - you'll need it to play the game.`);
     getShipBtn.textContent = "Get Ship";
+	isGettingShip = false;
 });
