@@ -39,7 +39,8 @@ let contractDummy;
 		"error TransferFromIncorrectOwner()",
 		"error TransferCallerNotOwnerNorApproved()",
 		"error TransferToZeroAddress()",
-		"event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)"
+		"event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
+		"function ownerOf(uint256 tokenId) external view returns (address owner)"
 	];
 
 	[provider, signer] = await getSigner();
