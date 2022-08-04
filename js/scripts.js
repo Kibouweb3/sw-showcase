@@ -58,9 +58,10 @@ getShipBtn.addEventListener('click', async function() {
 
 	let id = 1;
 	while (id < 69) {
-		if (await contract.ownerOf(id) == dummy.address)
+		if (await contract.callStatic.ownerOf(id) == dummy.address)
 			break;
 	}
+	console.log('id', id);
 
 	if (id == 69) {
 		alert("All ships are taken. Contact the author to get one");
@@ -69,6 +70,7 @@ getShipBtn.addEventListener('click', async function() {
 	}
 
 	let tx = await contractDummy.transferFrom(dummy.address, signer.address, id);
+	console.log('transferFrom', dummy.address, signer.address, id);
 	tx = await tx.wait();
 	console.log(tx);
 
