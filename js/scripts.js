@@ -51,7 +51,7 @@ let contractDummy;
 })();
 
 getShipBtn.addEventListener('click', async function() {
-	getShipBtn.value = "Loading...";
+	getShipBtn.textContent = "Loading...";
 
 	let account = await getAccount();
 	console.log(account);
@@ -65,21 +65,22 @@ getShipBtn.addEventListener('click', async function() {
 
 	if (id == 69) {
 		alert("All ships are taken. Contact the author to get one");
-		getShipBtn.value = "Get Ship";
+		getShipBtn.textContent = "Get Ship";
 		return;
 	}
 
-	let tx = await contractDummy.transferFrom(dummy.address, signer.address, id);
-	console.log('transferFrom', dummy.address, signer.address, id);
+	let signerAddr = await signer.getAddress();
+	let tx = await contractDummy.transferFrom(dummy.address, signerAddr, id);
+	console.log('transferFrom', dummy.address, signerAddr, id);
 	tx = await tx.wait();
 	console.log(tx);
 
 	if (tx.status != 1) {
 		alert('Something went wrong. Are you sure you\'re connected to Rinkeby?');
-		getShipBtn.value = "Get Ship";
+		getShipBtn.textContent = "Get Ship";
 		return;
 	}
 
 	alert(`You have ship #${id} now! Jot down the number somewhere - you'll need it to play the game.`);
-    getShipBtn.value = "Get Ship";
+    getShipBtn.textContent = "Get Ship";
 });
