@@ -56,9 +56,10 @@ getShipBtn.addEventListener('click', async function() {
 	let account = await getAccount();
 	console.log(account);
 
-	let id = 1;
+	let id = 0;
 	while (id < 69) {
-		if (await contract.callStatic.ownerOf(id) == dummy.address)
+		id++;
+		if (await contract.ownerOf(id) == dummy.address)
 			break;
 	}
 	console.log('id', id);
